@@ -1,28 +1,29 @@
 import React, { useRef } from 'react';
 import brand from '../assets/company.png';
-import emailjs from '@emailjs/browser';
 
 import './home.css'; // Import your CSS file for styling
 
 const ContactForm = () => {
   const form = useRef();
 
-  const sendEmail = (e) => {
+  const sendEmail = async (e) => {
     e.preventDefault();
 
-    emailjs
-      .sendForm('service_jpn6wkg', 'template_o8nemw4', form.current, {
-        publicKey: 'dURkrzhsB6XTw-UOK',
-      })
-      .then(
-        () => {
-          alert('Message sent, thank you!');
-          form.current.reset(); // Clear form fields
-        },
-        (error) => {
-          console.log('Message failed...', error.text);
-        }
-      );
+    // Here you can implement your own logic to handle the form submission
+    const formData = new FormData(form.current);
+    const email = formData.get('user_email');
+    const phoneNumber = formData.get('user_phone');
+    const message = formData.get('message');
+
+    // Example of handling the form data
+    console.log('Email:', email);
+    console.log('Phone Number:', phoneNumber);
+    console.log('Message:', message);
+
+    // You can add your own logic here, such as sending the form data to a backend server
+    // For demonstration purposes, we're just logging the form data to the console
+    alert('Message sent, thank you!');
+    form.current.reset(); // Clear form fields
   };
 
   return (
